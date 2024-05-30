@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'static/images' %}">
+    
+    <title>Game Vortex</title>
+</head>
+<body>
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'index' %}">
+                    <h2>GAME VORTEX</h2>
+                    
+                </a>
+
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <span class="me-3">Hello, Mr {{ user.username }}!</span>
+                    <a class="btn btn-outline-primary me-3"  href="{% url 'logout_user' %}">Logout</a>
+                {% else %}
+                    <a class="btn btn-outline-primary me-3" href="{% url 'signup' %}">Signup</a>
+                    <a class="btn btn-outline-primary" href="{% url 'login_user' %}">Login</a>
+                {% endif %}
+                
+                <!-- Icon -->
+                {% if user.cart %}
+                    <a class="text-reset me-3 d-flex align-items-center" href="{% url 'cart' %}">
+                        <i class="bi bi-cart" style="font-size: 1.5em;"></i>
+                        
+                    </a>
+                {% endif %}
+
+            </div>
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+
+    <div class="container-fluid px-4 py-5 my-5 text-center">
+        <div class="lc-block mb-4">
+            <div editable="rich">
+                <h2 class="display-2 fw-bold">Welcome to GameVortex!<span style="color: #33bbcf;">Pay Less</span></h2>
+                <h2 class="display-2 fw-bold">for the PC games you love.</h2>
+            </div>
+        </div>
+        <div class="lc-block col-lg-6 mx-auto mb-5">
+            <div editable="rich">
+
+                <p class="lead">Save more on every top-up
+                    Claim 10% cashback after every purchase</p>
+            </div>
+        </div>
+
+        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5"> <a class="btn btn-primary btn-lg px-4 gap-3" href="#" role="button" style="background-color: #33bbcf;">Shop Now</a>
+            <a class="btn btn-outline-secondary btn-lg px-4" href="#" role="button">Learn more</a>
+        </div>
+        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
